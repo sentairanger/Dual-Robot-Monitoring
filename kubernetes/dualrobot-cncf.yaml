@@ -1,0 +1,69 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    sidecar.jaegertracing.io/inject: "true"
+    prometheus.io/scrape: "true"
+    prometheus.io/path: /metrics
+    prometheus.io/port: dualport
+  labels:
+    name: dualrobot-cncf
+    release: prometheus
+  name: dualrobot-cncf
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dualrobot-cncf
+  template:
+    metadata:
+      labels:
+        app: dualrobot-cncf
+    spec:
+      containers:
+      - env:
+        - name: JAEGER_HOST
+          value: my-jaeger-tracing-default-agent.default.svc.cluster.local
+        name: dualrobot-cncf
+        image: linuxrobotgeek/dualrobot-cncf:latest
+        imagePullPolicy: Always
+        ports:
+        - name: dualport
+          containerPort: 5000
+          protocol: TCP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: dualrobot-cncf
+  labels:
+    app: dualrobot-cncf
+spec:
+  selector:
+    app: dualrobot-cncf
+  ports:
+    - name: dualrobot-cncf
+      protocol: TCP
+      port: 5000
+      targetPort: dualport
+  type: LoadBalancer
+---
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: dualrobot-cncf
+  namespace: monitoring
+  labels:
+    app: dualrobot-cncf
+    release: prometheus
+spec:
+  selector:
+    matchLabels:
+      app: dualrobot-cncf
+  endpoints:
+  - port: dualrobot-cncf
+    path: /metrics
+    interval: 15s
+  namespaceSelector:
+    matchNames:
+    - default
