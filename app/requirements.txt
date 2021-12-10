@@ -1,0 +1,6 @@
+Flask==2.0.2
+prometheus-flask-exporter==0.18.3
+gpiozero==1.6.2
+pigpio==1.78
+jaeger-client==4.8.0
+

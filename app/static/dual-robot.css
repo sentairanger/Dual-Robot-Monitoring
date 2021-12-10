@@ -1,0 +1,33 @@
+body {
+  background: #27F3E4;
+
+}
+
+
+.grid-button {
+	display:grid;
+	grid-template-columns: auto auto auto auto auto auto;
+}
+
+.grid-button button {
+		padding: 10px 24px;
+		color: white;
+		border-radius: 12px;
+		font-size: 16px;
+	
+}
+
+.linus {
+		background-color: green;
+
+	}
+
+	.torvalds {
+		background-color: red;
+		}
+.submit {
+	padding: 16px 32px;
+	font-size: 16px;
+	background:#ED2FF0;
+	
+	}

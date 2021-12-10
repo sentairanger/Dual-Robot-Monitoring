@@ -1,0 +1,49 @@
+<html>
+<head>
+<link rel="stylesheet" href="/static/dual-robot.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</head>
+<body>
+<h1> Dual Robot CNCF</h1>
+<h2>Dual Robot D-Pads</h2>
+<div class="grid-button">
+<button>None</button>
+<button class="linus" id="forward"> ^ </button>
+<button>None</button>
+<button>None</button>
+<button class="torvalds" id="north"> ^ </button>
+<button>None</button>
+<button class="linus" id="left"> < </button>
+<button class="linus" id="linus">Blink</button>
+<button class="linus" id="right">></button>
+<button class="torvalds" id="west"><</button>
+<button class="torvalds" id="torvalds">Blink</button>
+<button class="torvalds" id="east">></button>
+<button>None</button>
+<button class="linus" id="backward">v</button>
+<button>None</button>
+<button>None</button>
+<button class="torvalds" id="south">v</button>
+<button>None</button>
+</div>
+
+<h2>Servos</h2>
+<form method="POST" action="servoarm">
+<input type="range" min="-90" max="90" value="0" name="degree" id="servoRange" />
+<p>Value:<span id="servo"></span></p>
+<input type="range" min="-90" max="90" value="0" name="degree2" id="servoRange2" />
+<p>Value:<span id="servo2"></span></p>
+<input type="submit" class="submit" value="Move Servos"/>
+</form>
+
+<h2>PWM Control</h2>
+<form method="POST" action="motorpwm">
+<input type="range" min="-0" max="10" value="0" name="speed" id="pwmRange"/>
+<p>Value:<span id="pwm"></span></p>
+<input type="range" min="0" max="10" value="0" name="speed2" id="pwmRange2" />
+<p>Value:<span id="pwm2"></span></p>
+<input type="submit"class="submit" value="Change Speed" />
+</form>
+<script src="/static/dual-robot.js"></script>
+</body>
+</html>
