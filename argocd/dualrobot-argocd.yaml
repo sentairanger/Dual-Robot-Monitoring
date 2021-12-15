@@ -10,6 +10,6 @@ spec:
   project: default
   source:
     path: kubernetes
-    repoURL: https://github.com/sentairanger/Dual-Robot-CNCF
+    repoURL: https://github.com/sentairanger/Dual-Robot-Monitoring
     targetRevision: HEAD
   syncPolicy: {}
